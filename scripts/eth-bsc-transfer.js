@@ -1,10 +1,9 @@
 const { ethers } = require("hardhat");
+const { bridgeEthAddress } = require('../constants/constants');
+
 
 async function main() {
   const [signer] = await ethers.getSigners();
-
-  const bridgeEthAddress = "0x86Ac3d27Ee013E10cfA3D36D048d9C62B63Db4D5";
-
   const BridgeEth = await ethers.getContractFactory("BridgeEth");
   const bridgeEth = await BridgeEth.attach(bridgeEthAddress);
 
