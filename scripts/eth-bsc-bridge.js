@@ -4,6 +4,7 @@ const ABI1 =  [{"inputs":[{"internalType":"address","name":"_token","type":"addr
 require("dotenv").config();
 const {Web3} = require('web3');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
+const {sepoliaWallet, binanceWallet} = require('../constants/constants');
 
 const {
   ethAddress,
@@ -12,14 +13,10 @@ const {
 
 
 async function getTransfer() {
-    const provider = new ethers.providers.WebSocketProvider(
-      `wss://sepolia.infura.io/ws/v3/6618a602d5e141de9ac09abf770d0108`
-    );
-
-
+    const provider = new ethers.providers.WebSocketProvider(sepoliaWallet);
     const provider2 = new HDWalletProvider(
       '',
-      'https://data-seed-prebsc-2-s2.binance.org:8545'
+      binanceWallet
     );
   
     const web3 = new Web3(provider2);
@@ -31,12 +28,6 @@ async function getTransfer() {
     const contract = new ethers.Contract(ethAddress, ABI, provider);
   
     const transferListener = async (from, to, value, nonce, event) => {
-      let transferEvent = {
-        from: from,
-        to: to,
-        value: value,
-        eventData: event,
-      };
   
       const tx = await contract2.methods.mint(to, Number(value), Number(nonce)).send({ from: accounts[0]});;
       console.log(tx);

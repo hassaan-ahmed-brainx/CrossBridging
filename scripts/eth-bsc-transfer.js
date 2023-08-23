@@ -1,5 +1,5 @@
 const { ethers } = require("hardhat");
-const { bridgeEthAddress } = require('../constants/constants');
+const { bridgeEthAddress, valueToBurn } = require('../constants/constants');
 
 
 async function main() {
@@ -9,7 +9,7 @@ async function main() {
 
   const recipient = signer.address;
 
-  const eventRes = await bridgeEth.burn(recipient, 100000000000);
+  const eventRes = await bridgeEth.burn(recipient, valueToBurn);
   console.log({eventRes})
   console.log("Burn transaction completed.");
 }

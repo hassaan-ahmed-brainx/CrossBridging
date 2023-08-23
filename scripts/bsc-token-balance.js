@@ -8,9 +8,9 @@ const {
 
 async function main() {
   const [sender] = await ethers.getSigners();
-  const TokenEth = await ethers.getContractFactory("TokenBsc");
-  const tokenEth = await TokenEth.attach(tokenEthAddress);
-  const balance = await tokenEth.balanceOf(sender.address);
+  const TokenBsc = await ethers.getContractFactory("TokenBsc");
+  const tokenBsc = await TokenBsc.attach(tokenEthAddress);
+  const balance = await tokenBsc.balanceOf(sender.address);
   console.log(balance.toString());
 }
 
